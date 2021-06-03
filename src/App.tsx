@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
 import './App.css';
 import { storeContext, Image } from './StateProvider';
 
@@ -13,15 +13,22 @@ function App(props: Props) {
   const currentIndex = inBound(appState.index, appState.images.length);
   const currentImage = appState.images[currentIndex];
 
-  const rotateImage = () => {
+  const rotateImage = useCallback(() => {
     setAppState(prevState => ({ 
       ...prevState, 
       images: prevState.images.map((img, idx) => idx === currentIndex ? { ...img, rotation: img.rotation + 30 } : img) 
     }));
-  };
+  }, []);
 
-  const next = () => setAppState({ ...appState, index: appState.index + 1 });
-  const prev = () => setAppState({ ...appState, index: appState.index - 1 });
+  const next = useCallback(
+    () => setAppState({ ...appState, index: appState.index + 1 }),
+    []
+  );
+  
+  const prev = useCallback(
+    () => setAppState({ ...appState, index: appState.index - 1 }),
+    []
+  );
 
 
   return (
@@ -42,7 +49,7 @@ type ControlsProps = {
   next: () => void,
 }
 
-function Controls(props: ControlsProps) {
+const Controls = memo((props: ControlsProps) => {
   const { prev, next, rotateImage } = props;
   return (
     <>
@@ -51,7 +58,7 @@ function Controls(props: ControlsProps) {
       <button onClick={ ()=>next() }>Next</button>
     </>
   );
-}
+});
 
 type FrameProps = { image: Image };
 function Frame(props: FrameProps) {
