@@ -1,23 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { AnyAction } from 'redux';
 import './App.css';
-import { storeContext, Image } from './StateProvider';
+import { Image, AppState } from './StateProvider';
 
 type Props = {
-  borderColour: 'blue' | 'red'
+  borderColour: 'blue' | 'red',
+  appState: AppState,
+  loadImages: () => AnyAction,
+  setAppState: (state: AppState) => AnyAction,
 };
 
-function App(props: Props) {
-  const store = useContext(storeContext);
-  const { state: appState, setState: setAppState } = store;
+function App({ appState, loadImages, setAppState }: Props) {
+  useEffect(() => { loadImages(); }, []);
 
   const currentIndex = inBound(appState.index, appState.images.length);
   const currentImage = appState.images[currentIndex];
 
   const rotateImage = () => {
-    setAppState(prevState => ({ 
-      ...prevState, 
-      images: prevState.images.map((img, idx) => idx === currentIndex ? { ...img, rotation: img.rotation + 30 } : img) 
-    }));
+    setAppState({
+      ...appState, 
+      images: appState.images.map((img, idx) => idx === currentIndex ? { ...img, rotation: img.rotation + 30 } : img) 
+    });
   };
 
   const next = () => setAppState({ ...appState, index: appState.index + 1 });
@@ -70,4 +74,10 @@ function inBound(idx: number, length: number): number {
   return ((idx % length) + length) % length;
 }
 
-export default App;
+export default connect(
+  (st: AppState) => ({ appState: st }),
+  dispatch => ({
+    loadImages: () => dispatch({ type: 'loadImages' }),
+    setAppState: (state: AppState) => dispatch({ type: 'setAppState', payload: state })
+  })
+)(App);
