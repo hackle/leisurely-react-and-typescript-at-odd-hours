@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import { AppState, selectCurrentImage, Image } from "./store";
+import { AppState, selectCurrentImage, RotatedImage } from "./store";
 
-type FrameProps = { image: Image };
+type FrameProps = { image: RotatedImage };
 const Frame = (props: FrameProps) => {
-    console.warn(`Frame is reconstructed`);
+    if (props.image == null) return <div>Loading</div>;
 
   return (
     <img src={ props.image.url } 
