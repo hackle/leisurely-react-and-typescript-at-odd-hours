@@ -1,11 +1,9 @@
-import { useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
-import { RouteParam } from "./App";
-import { AppState, selectCurrentImage, Image, ImageSize, LoadImagesAction } from "./store";
+import { RotatedImage, AppState } from "./state";
+import { selectCurrentImage } from "./store";
 
 type FrameProps = { 
-  image: Image
+  image: RotatedImage
 };
 
 const Frame = (props: FrameProps) => {

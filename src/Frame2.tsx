@@ -1,8 +1,9 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { AppState, selectCurrentImage, Image } from "./store";
+import { AppState, RotatedImage } from "./state";
+import { selectCurrentImage } from "./store";
 
-type FrameProps = { image: Image };
+type FrameProps = { image: RotatedImage };
 class Frame2 extends Component<FrameProps> {
   constructor(props: FrameProps) {
     console.warn(`Frame2 is reconstructed`);

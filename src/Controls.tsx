@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { RouteParam } from "./App";
-import { ImageSize, LoadImagesAction, NextImageAction, PrevImageAction, RotateImageAction } from "./store";
+import { ImageSize } from "./state";
+import { LoadImagesAction, NextImageAction, PrevImageAction, RotateImageAction } from "./store";
 
 type ControlsProps = {
     prev: () => void,

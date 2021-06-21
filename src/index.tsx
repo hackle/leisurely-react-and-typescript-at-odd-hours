@@ -4,7 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { createStoreWithApiConfig } from './store';
+import { apiConfig } from './apiConfig';
+
+const store = createStoreWithApiConfig(apiConfig);
 
 ReactDOM.render(
   <React.StrictMode>

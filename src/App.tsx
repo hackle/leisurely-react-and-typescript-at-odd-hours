@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import './App.css';
-import { ImageSize, LoadImagesAction } from './store';
+import { LoadImagesAction } from './store';
 import Frame from './Frame';
 import Controls from './Controls';
 import Frame2 from './Frame2';
@@ -11,6 +11,7 @@ import { appHistory } from './history';
 import { Summary } from './Summary';
 import { Grid, Tab, Tabs } from '@material-ui/core';
 import { Nav } from './Nav';
+import { ImageSize } from './state';
 
 type Props = {
   borderColour: 'blue' | 'red',

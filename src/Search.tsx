@@ -1,10 +1,7 @@
-import { Button, createStyles, FormControl, FormHelperText, Grid, InputLabel, makeStyles, Select, TextField, Typography } from "@material-ui/core";
-import Input from "@material-ui/core/Input";
-import React from "react";
+import { Button, FormControl, FormHelperText, makeStyles, Select, TextField, Typography } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
-import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { ImageSize, LoadImagesAction } from "./store";
+import { ImageSize } from "./state";
 
 type Props = {
 };
