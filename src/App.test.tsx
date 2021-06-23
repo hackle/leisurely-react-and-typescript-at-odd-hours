@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import { createStoreWithApiConfig } from './store';
 import { PixaResponse } from './apiConfig';
@@ -40,6 +40,5 @@ test('Renders app and can search', async () => {
 
   userEvent.click(searchButton);
 
-  const frame = await screen.findByRole('img');
-  expect(frame).not.toBeNull();
+  await waitFor(() => screen.getByRole('img'));
 });

@@ -15,23 +15,13 @@ const validateTerm = {
     gross: (str: string) => ['slime', 'slug'].includes(str?.trim() ?? '') ? 'No gross stuff please' : undefined,
 };
 
-const formStyles = makeStyles({
-    root: {
-        padding: '15px 50px 15px 50px',
-        backgroundColor: 'silver',
-        borderRadius: '5px',
-    }
-});
-
 function Search(props: Props) {
     const appHistory = useHistory();
     const { handleSubmit, register, formState, control } = useForm<SearchForm>();
     const onSubmit = (data: SearchForm) => appHistory.push(`/photos/${data.term}/${data.size}`);
     const errors = formState.errors;
-    const styles = formStyles();
 
-    return <div className={styles.root}>                
-        <form onSubmit={handleSubmit(onSubmit)} className="search-form">
+    return <form onSubmit={handleSubmit(onSubmit)} className="search-form">
             <FormControl fullWidth margin="normal">
                 <Typography variant="h5">Search for:</Typography>
                 <Controller
@@ -51,9 +41,9 @@ function Search(props: Props) {
                     }
                 />
                 <FormHelperText>
-                    {errors.term?.message ? <p>{errors.term?.message}</p> : undefined}
-                    {errors.term?.type === 'minLength' && <p>Term must be at least 3 characters</p>}
-                    {errors.term?.type === 'required' && <p>Term is required</p>}
+                    {errors.term?.message ? <>{errors.term?.message}</> : undefined}
+                    {errors.term?.type === 'minLength' && <>Term must be at least 3 characters</>}
+                    {errors.term?.type === 'required' && <>Term is required</>}
                 </FormHelperText>
             </FormControl>
             <FormControl fullWidth margin="normal">
@@ -74,8 +64,7 @@ function Search(props: Props) {
                 />
             </FormControl>
             <Button type="submit" variant="contained" color="primary">Search</Button>
-        </form>
-    </div>;
+        </form>;
 }
 
 export default Search;
