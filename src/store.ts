@@ -18,10 +18,12 @@ export function createStoreWithApiConfig(apiConfig: ApiConfig) {
     return store;
 }
 
+type AllActions = RotateImageAction | SetImagesAction | NextImageAction | PrevImageAction | { type: 'Tiger' };
+
 // (State, Action) -> State
 function reducer(
     state: AppState = initialAppState, 
-    action: RotateImageAction | SetImagesAction | NextImageAction | PrevImageAction
+    action: AllActions
 ): AppState {
     switch (action.type) {
         case 'rotateImage': 
@@ -53,7 +55,7 @@ function reducer(
 
 export function selectCurrentImage(state: AppState): RotatedImage {
     return state.images[inBound(state.index, state.images.length)] 
-        ?? { url: 'invalid', rotation: 45 };
+        ?? { url: undefined, rotation: 45 };
 }
 
 export type RotateImageAction = {

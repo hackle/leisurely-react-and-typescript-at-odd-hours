@@ -8,15 +8,15 @@ type FrameProps = {
 
 const Frame = (props: FrameProps) => {
 
-  return (
+  return props.image.url ? (
     <img src={ props.image.url } 
-    style={ { 
-      transform: `rotate(${props.image.rotation}deg)`, 
-      borderWidth: '2px', 
-      borderStyle: "solid"
-    } } 
-    alt="logo" />
-  );
+      style={ { 
+        transform: `rotate(${props.image.rotation}deg)`, 
+        borderWidth: '2px', 
+        borderStyle: "solid"
+      } } 
+      alt="logo" />
+  ) : null;
 }
 
 function mapStateToProps(state: AppState): FrameProps {

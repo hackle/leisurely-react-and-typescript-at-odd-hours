@@ -18,7 +18,7 @@ type UniformEventType = 'create' | 'read' | 'update' | 'delete';
 type ToUniformType<T extends MessageKind | EventType> = 
     T extends 'GET' ? 'read'
         : T extends 'REMOVE' ? 'delete'
-            : `${Lowercase<T>}`;
+            : Lowercase<T>;
 
 type MapToUniformType = {
     [K in MessageKind | EventType]: ToUniformType<K>

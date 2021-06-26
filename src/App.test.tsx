@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { findByRole, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import { createStoreWithApiConfig } from './store';
 import { PixaResponse } from './apiConfig';
@@ -41,4 +41,11 @@ test('Renders app and can search', async () => {
   userEvent.click(searchButton);
 
   await waitFor(() => screen.getByRole('img'));
+
+  const rotateButton = screen.getByRole('button', { name: 'Rotate' });
+  userEvent.click(rotateButton);
+
+  const rotatedImg = await screen.findByRole('img');
+
+  expect(rotatedImg.style.transform).toEqual('rotate(15deg)');
 });
