@@ -2,6 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import { ApiConfig } from "./apiConfig";
+import { AppUser } from "./auth/auth";
 import { makeImagesSaga } from "./saga";
 import { initialAppState, AppState, ImageSize, RotatedImage } from "./state";
 
@@ -18,7 +19,11 @@ export function createStoreWithApiConfig(apiConfig: ApiConfig) {
     return store;
 }
 
-type AllActions = RotateImageAction | SetImagesAction | NextImageAction | PrevImageAction | { type: 'Tiger' };
+type AllActions = RotateImageAction 
+    | SetImagesAction 
+    | NextImageAction 
+    | PrevImageAction 
+    | SetAppUserAction;
 
 // (State, Action) -> State
 function reducer(
@@ -36,6 +41,7 @@ function reducer(
             }
         case 'setImages':
             return {
+                ...state,
                 index: 0,
                 images: action.payload
             };
@@ -48,6 +54,11 @@ function reducer(
             return {
                 ...state,
                 index: state.index - 1
+            };
+        case 'setAppUser':
+            return {
+                ...state,
+                user: action.payload
             };
         default: return state;
     }
@@ -80,6 +91,15 @@ export type SetImagesAction = {
     type: 'setImages',
     payload: RotatedImage[],
 };
+
+export type SetAppUserAction = {
+    type: 'setAppUser',
+    payload: AppUser
+}
+
+export type LoadUserAction = {
+    type: 'loadUser'
+}
 
 function inBound(idx: number, length: number): number {
     return ((idx % length) + length) % length;

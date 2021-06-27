@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import './App.css';
-import { LoadImagesAction } from './store';
+import { LoadImagesAction, LoadUserAction } from './store';
 import Frame from './Frame';
 import Controls from './Controls';
 import Frame2 from './Frame2';
@@ -10,33 +10,69 @@ import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import { appHistory } from './history';
 import { Summary } from './Summary';
 import { Grid, Tab, Tabs } from '@material-ui/core';
-import { Nav } from './Nav';
-import { ImageSize } from './state';
+import Nav from './Nav';
+import { AppState, ImageSize } from './state';
+import { LogIn, LogInCallback } from './auth/LogIn';
+import { LogOut } from './auth/LogOut';
+import { AppUser, getCurrentUser } from './auth/auth';
 
 type Props = {
   borderColour: 'blue' | 'red',
   loadImages: () => LoadImagesAction
+  loadUser: () => LoadUserAction,
+  user?: AppUser
 };
 
 export type RouteParam = { term: string, size: ImageSize };
 
-function App(props: Props) {
+function App({ user, loadUser }: Props) {
+  useEffect(() => { loadUser(); }, []);
+  
   return (
       <Router>
+        <Nav />
         <Switch>
-          <Route path="/photos/:term/:size">
-            <Frame />
-            <Controls />
-            <Summary />
+          <Route path="/login/callback">
+            <LogInCallback />
+          </Route>
+          <Route path="/login">
+            <LogIn />
+          </Route>
+          <Route path="/logout/callback">
+            You have logged out
+          </Route>
+          <Route path="/logout">
+            <LogOut />
+          </Route>
+          <Route path="/photos/:term/:size"
+            render={props => 
+              (user?.permissions ?? []).includes('photo:view')
+              ? (<>
+                  <Frame />
+                  <Controls />
+                  <Summary />
+                </>)
+              : <div>You don't have permission to view photos</div>
+            }>
+          </Route>
+          <Route path="/search"
+            render={props => 
+              (user?.permissions ?? []).includes('photo:search')
+              ? <Search />
+              : <div>You don't have permission to search photos</div>
+            }>
           </Route>
           <Route path="*">
-            <Search />
+            Nothing to see here.
           </Route>
         </Switch>
       </Router>
   );
 }
 
-export default connect(undefined, {
+export default connect((state: AppState) => ({
+  user: state.user
+}), {
+  loadUser: () => ({ type: 'loadUser' as const }) as LoadUserAction,
   loadImages: () => ({ type: 'loadImages' as const, payload: { term: 'tiger', size: 'preview' } } as LoadImagesAction)
 })(App);

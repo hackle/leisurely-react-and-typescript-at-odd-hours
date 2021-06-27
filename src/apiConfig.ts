@@ -1,3 +1,4 @@
+import { AppUser, getCurrentUser } from "./auth/auth";
 import { ImageSize } from "./state";
 
 export type PixaResponse = { 
@@ -13,6 +14,7 @@ const makeUrl = (term: string) => `https://pixabay.com/api/?key=${apiKey}&q=${en
 
 export type ApiConfig = {
     loadImages: (term: string) => Promise<PixaResponse>;
+    loadUser: () => Promise<AppUser | undefined>;
 };
 
 async function loadImages(term: string): Promise<PixaResponse> {
@@ -23,5 +25,6 @@ async function loadImages(term: string): Promise<PixaResponse> {
 }
 
 export const apiConfig: ApiConfig = {
-    loadImages
+    loadImages,
+    loadUser: getCurrentUser
 };
