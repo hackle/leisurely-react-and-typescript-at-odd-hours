@@ -8,7 +8,7 @@ export const Summary = () => {
     const { term } = useParams<RouteParam>();
 
     return <>
-        <span>You searched for <b>{term}</b></span>
+        <p>You searched for <b>{term}</b> </p>
         <Link to="/search">Search for something else </Link>
     </>;
 }
