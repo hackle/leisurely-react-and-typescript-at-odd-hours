@@ -15,7 +15,7 @@ function component(props: Record<any, any>) {
 }
 
 describe('closure', () => {
-    it('keeps count of states', () => {
+    xit('keeps count of states', () => {
         const name1 = component({ name: 'George' });
         const name2 = component({ name: 'Jerry' });
 

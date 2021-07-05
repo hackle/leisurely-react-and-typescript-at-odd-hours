@@ -28,7 +28,9 @@ jobs:
       run: |
         npm ci
         npm run build
-        npm test
+        
+    - name: tests
+      run: npm test
 
     - name: artifact
       uses: actions/upload-artifact@v2
