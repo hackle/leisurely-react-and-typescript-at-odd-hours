@@ -25,9 +25,11 @@ jobs:
         node-version: 16.4.0
     
     - name: npm stuff
+      env:
+        PUBLIC_URL: https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/
       run: |
         npm ci
-        PUBLIC_URL=https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/ npm run build
+        npm run build
         
     - name: tests
       run: npm test
