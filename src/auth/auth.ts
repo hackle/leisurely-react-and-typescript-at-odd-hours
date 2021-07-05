@@ -3,9 +3,9 @@ import {decode} from 'jsonwebtoken';
 
 export const makeAuthClient = () => createAuth0Client({
     domain: 'hacks.au.auth0.com',
-    client_id: 'owW42bVgGNZE65tspVC79lfMtmgKt4Iv',
-    redirect_uri: 'https://reactoddhours.com:3000/login/callback',
-    audience: 'https://api.reactoddhours.com:3001/'
+    client_id: process.env.REACT_APP_AUTH_CLIENT_ID!,
+    redirect_uri: process.env.REACT_APP_AUTH_REDIRECT_URI,
+    audience: process.env.REACT_APP_AUTH_AUDIENCE
 });
 
 export async function getCurrentUser(): Promise<AppUser | undefined> {
