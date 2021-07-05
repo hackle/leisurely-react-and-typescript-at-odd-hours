@@ -27,7 +27,7 @@ jobs:
     - name: npm stuff
       run: |
         npm ci
-        npm run build
+        PUBLIC_URL=https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/ npm run build
         
     - name: tests
       run: npm test
