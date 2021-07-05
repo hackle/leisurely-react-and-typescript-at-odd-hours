@@ -1,0 +1,54 @@
+name: Build & deploy
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+    
+    - name: set up node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.4.0
+    
+    - name: npm stuff
+      run: |
+        npm ci
+        npm run build
+        npm test
+
+    - name: artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-app
+        path: ./build
+  
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: fetch artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build-app
+        path: ./build
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: build # The folder the action should deploy.
