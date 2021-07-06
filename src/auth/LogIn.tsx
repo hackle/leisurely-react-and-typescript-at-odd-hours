@@ -1,7 +1,7 @@
 import { AuthenticationError } from "@auth0/auth0-spa-js";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { AppState } from "../state";
 import { LoadUserAction } from "../store";
 import { AppUser, makeAuthClient } from "./auth";
@@ -20,11 +20,13 @@ export const LogIn = () => {
 type Props = { user?: AppUser, loadUser: () => LoadUserAction };
 const LogInCallbackInner = ({ loadUser, user }: Props) => {
     const history = useHistory();
+    const location = useLocation();
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         if (user != null) {
-            window.location.href = '/#/search';
+            window.history.replaceState(null, '', `/#/${location.pathname}`);
+            history.push('/search');
             return;
         }
     }, [user]);
