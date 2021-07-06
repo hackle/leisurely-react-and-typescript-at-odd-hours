@@ -28,7 +28,7 @@ jobs:
       env:
         PUBLIC_URL: https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/
         REACT_APP_AUTH_CLIENT_ID: "S8N9i0qIl2MuQjUHiGPDHsdDDeqDMx4k"
-        REACT_APP_AUTH_REDIRECT_URI: "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/login/callback"
+        REACT_APP_AUTH_REDIRECT_URI: "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/#/login/callback"
         REACT_APP_AUTH_AUDIENCE: "https://api.reactoddhours.com:3001/"
       run: |
         npm ci
