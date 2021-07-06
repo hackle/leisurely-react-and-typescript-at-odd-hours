@@ -70,6 +70,7 @@ jobs:
       uses: getsentry/action-release@v1
       with:
         sourcemaps: ./build/static/js
+        set_commits: skip
       env:
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         SENTRY_ORG: hacks-hacks
