@@ -37,6 +37,15 @@ jobs:
     - name: tests
       run: npm test
 
+    - name: Create Sentry release
+      uses: getsentry/action-release@v1
+      with:
+        sourcemaps: ./build/static/js
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: hacks-hacks
+        SENTRY_PROJECT: react-odd-hours
+
     - name: artifact
       uses: actions/upload-artifact@v2
       with:
@@ -64,13 +73,3 @@ jobs:
         build_dir: build
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create Sentry release
-      uses: getsentry/action-release@v1
-      with:
-        sourcemaps: ./build/static/js
-        set_commits: skip
-      env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        SENTRY_ORG: hacks-hacks
-        SENTRY_PROJECT: react-odd-hours
