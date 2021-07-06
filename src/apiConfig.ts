@@ -10,7 +10,7 @@ export type PixaResponse = {
 };
 
 const apiKey = '18049587-99bf6238de19f175bd7defcf8';
-const makeUrl = (term: string) => `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(term)}&image_type=photo&pretty=true`;
+const makeUrl = (term: string) => `http://localhost:8080/photos/${encodeURIComponent(term)}`;
 
 export type ApiConfig = {
     loadImages: (term: string) => Promise<PixaResponse>;
@@ -18,7 +18,8 @@ export type ApiConfig = {
 };
 
 async function loadImages(term: string): Promise<PixaResponse> {
-    const response = await fetch(makeUrl(term));
+    const user = await getCurrentUser();
+    const response = await fetch(makeUrl(term), { headers: { Authorization: `Bearer ${user?.authToken!}` } });
     const json: PixaResponse = await response.json();
 
     return json;

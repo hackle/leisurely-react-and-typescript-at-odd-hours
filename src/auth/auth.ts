@@ -13,17 +13,20 @@ export async function getCurrentUser(): Promise<AppUser | undefined> {
     const user = await authClient.getUser();
     if (user == null) return undefined;
 
+    const authToken = await authClient.getTokenSilently();
     return {
         name: user.name ?? 'Unnamed',
         picture: user.picture,
-        permissions: decodeToken(await authClient.getTokenSilently())
+        permissions: decodeToken(authToken),
+        authToken,
     }
 }
 export type Permission = 'photo:search' | 'photo:view' | 'photo:rotate';
 export type AppUser = {
     name: string,
     picture?: string,
-    permissions: Permission[]
+    permissions: Permission[],
+    authToken: string,
 }
 
 function decodeToken(raw?: string): Permission[] {
