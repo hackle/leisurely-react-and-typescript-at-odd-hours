@@ -6,7 +6,7 @@ import Controls from './Controls';
 import Frame2 from './Frame2';
 import React, { useEffect, useState } from 'react';
 import Search from './Search';
-import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Link, HashRouter } from 'react-router-dom';
 import { appHistory } from './history';
 import { Summary } from './Summary';
 import { Grid, Tab, Tabs } from '@material-ui/core';
@@ -29,7 +29,7 @@ function App({ user, loadUser }: Props) {
   useEffect(() => { loadUser(); }, []);
   
   return (
-      <Router>
+      <HashRouter>
         <Nav />
         <Switch>
           <Route path="/login/callback">
@@ -66,7 +66,7 @@ function App({ user, loadUser }: Props) {
             Nothing to see here.
           </Route>
         </Switch>
-      </Router>
+      </HashRouter>
   );
 }
 

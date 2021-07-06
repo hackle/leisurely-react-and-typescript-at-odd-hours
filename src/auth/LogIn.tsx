@@ -24,7 +24,7 @@ const LogInCallbackInner = ({ loadUser, user }: Props) => {
 
     useEffect(() => {
         if (user != null) {
-            history.push('/search');
+            window.location.href = '/#/search';
             return;
         }
     }, [user]);
