@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/css/main.d468d022.chunk.css",
+    "main.js": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/main.cd5920b2.chunk.js",
+    "main.js.map": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/main.cd5920b2.chunk.js.map",
+    "runtime-main.js": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/runtime-main.f48741d6.js",
+    "runtime-main.js.map": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/runtime-main.f48741d6.js.map",
+    "static/js/2.48278ffb.chunk.js": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/2.48278ffb.chunk.js",
+    "static/js/2.48278ffb.chunk.js.map": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/2.48278ffb.chunk.js.map",
+    "static/js/3.fa5285f5.chunk.js": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/3.fa5285f5.chunk.js",
+    "static/js/3.fa5285f5.chunk.js.map": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/3.fa5285f5.chunk.js.map",
+    "index.html": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/index.html",
+    "static/css/main.d468d022.chunk.css.map": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/css/main.d468d022.chunk.css.map",
+    "static/js/2.48278ffb.chunk.js.LICENSE.txt": "https://hackle.github.io/leisurely-react-and-typescript-at-odd-hours/static/js/2.48278ffb.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f48741d6.js",
+    "static/js/2.48278ffb.chunk.js",
+    "static/css/main.d468d022.chunk.css",
+    "static/js/main.cd5920b2.chunk.js"
+  ]
+}
